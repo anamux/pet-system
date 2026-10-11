@@ -1,17 +1,30 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+import java.util.Scanner;
+
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner scanner = new Scanner(System.in);
+        PetShop pet1 = new PetShop();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+
+        System.out.println("Qual é o nome do pet?");
+        pet1.nome = scanner.nextLine();
+
+        System.out.println("Qual é a raça:");
+        pet1.especie = scanner.nextLine();
+
+        System.out.println("Qual é o peso?");
+        pet1.peso = scanner.nextDouble();
+
+
+    System.out.println("========= FICHA DO PET =========");
+        System.out.println("Nome: " + pet1.nome);
+        System.out.println("Peso: " + pet1.peso + "kg.");
+        System.out.println("Espécie: " + pet1.especie);
+        pet1.portePet();
     }
+
 }
