@@ -18,6 +18,7 @@ public class Main {
             System.out.println("========= FICHA DO PET =========");
             System.out.println("1 - Cadastrar novo pet.");
             System.out.println("2 - Listar pets");
+            System.out.println("3 - Buscar pelo nome.");
             System.out.println("0 - Sair.");
 
 
@@ -61,7 +62,24 @@ public class Main {
                             }
                         }
 
+                    case 3:
+                        System.out.println("Digite o nome que deseja buscar: ");
+                        String busca = scannerOpcao.nextLine();
+                        boolean achou = false;
+                        for (int i = 0; i<total; i++) {
+                            if (petsCadastrados[i].nome.equalsIgnoreCase(busca)){
 
+                                System.out.println(petsCadastrados[i].nome + "(" + petsCadastrados[i].especie + ")"
+                                        + " - " + petsCadastrados[i].peso + " kg.");
+                                achou = true;
+
+                            }
+
+                           if (!achou){
+                               System.out.println("Pet não encontrado nos registros.");
+                           }
+
+                        }
 
                     case 0:
                         System.out.println("Finalizando o sistema. Até a próxima.");
@@ -75,17 +93,6 @@ public class Main {
 
         }
         scannerOpcao.close();
-
-
-/*
-    System.out.println("========= FICHA DO PET =========");
-        System.out.println("Nome: " + pet1.nome);
-        System.out.println("Peso: " + pet1.peso + "kg.");
-        System.out.println("Espécie: " + pet1.especie);
-        System.out.println("Porte: " + pet1.portePet());
-
-        System.out.println("--- PETS CADASTRADOS ---");
-        System.out.print(petsCadastrados[0].nome + " - " + petsCadastrados[0].peso + " - " + petsCadastrados[0].portePet());*/
 
     }
 
