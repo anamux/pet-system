@@ -16,11 +16,14 @@ public class Main {
 
         while (opcao != 0 ){
             System.out.println("========= FICHA DO PET =========");
-            System.out.println("Para cadastrar um novo pet digite 1. Para sair digite 0.");
+            System.out.println("1 - Cadastrar novo pet.");
+            System.out.println("2 - Listar pets");
+            System.out.println("0 - Sair.");
 
 
                 opcao = scannerOpcao.nextInt();
                 scannerOpcao.nextLine();
+            System.out.println("Opção selecionada: " + opcao);
                 switch (opcao){
                     case 1:
                         if (total <5){
@@ -39,15 +42,25 @@ public class Main {
 
                             System.out.println("Pet cadastrado. Agora são "+ (total+1) + " pets.");
 
-//                            System.out.println(petsCadastrados[total].nome);
-//                            System.out.println(petsCadastrados[total].especie);
-//                            System.out.println(petsCadastrados[total].peso);
-
                             total ++;
                         } else {
                             System.out.println("Limite de 5 pets atingido.");
                         }
                         break;
+
+                    case 2:
+                        if (total == 0){
+                            System.out.println("Ainda não temos nenhum pet cadastrado.");
+                        }else {
+                            System.out.println("--- PETS CADASTRADOS ---");
+
+                            for (int i = 0; i<total; i++){
+                                System.out.println(petsCadastrados[i].nome + "(" + petsCadastrados[i].especie + ")"
+                                        + " - " + petsCadastrados[i].peso + " kg.");
+
+                            }
+                        }
+
 
 
                     case 0:
