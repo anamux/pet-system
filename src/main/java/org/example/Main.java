@@ -2,6 +2,8 @@ package org.example;
 
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -19,12 +21,15 @@ public class Main {
             System.out.println("1 - Cadastrar novo pet.");
             System.out.println("2 - Listar pets");
             System.out.println("3 - Buscar pelo nome.");
+            System.out.println("4 - Listagem de espécies.");
             System.out.println("0 - Sair.");
 
 
                 opcao = scannerOpcao.nextInt();
                 scannerOpcao.nextLine();
             System.out.println("Opção selecionada: " + opcao);
+
+            try {
                 switch (opcao){
                     case 1:
                         if (total <5){
@@ -61,6 +66,7 @@ public class Main {
 
                             }
                         }
+                        break;
 
                     case 3:
                         System.out.println("Digite o nome que deseja buscar: ");
@@ -75,11 +81,23 @@ public class Main {
 
                             }
 
-                           if (!achou){
-                               System.out.println("Pet não encontrado nos registros.");
-                           }
+                            if (!achou){
+                                System.out.println("Pet não encontrado nos registros.");
+                            }
 
                         }
+                        break;
+
+                    case 4:
+                        HashSet<String> especies = new HashSet<>();
+                        for (int i = 0; i< total; i++){
+                            especies.add(petsCadastrados[i].especie);
+                        }
+                        for (String especie : especies){
+                            System.out.println(especie);
+                        }
+                        System.out.println(especies.size());
+                        break;
 
                     case 0:
                         System.out.println("Finalizando o sistema. Até a próxima.");
@@ -89,6 +107,11 @@ public class Main {
                         System.out.println("Opção inválida!");
 
                 }
+
+            } catch (InputMismatchException e){
+                System.out.println("Digite apenas números!");
+                scannerOpcao.nextLine();
+            }
 
 
         }
