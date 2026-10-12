@@ -2,6 +2,8 @@ package org.example;
 
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -16,11 +18,18 @@ public class Main {
 
         while (opcao != 0 ){
             System.out.println("========= FICHA DO PET =========");
-            System.out.println("Para cadastrar um novo pet digite 1. Para sair digite 0.");
+            System.out.println("1 - Cadastrar novo pet.");
+            System.out.println("2 - Listar pets");
+            System.out.println("3 - Buscar pelo nome.");
+            System.out.println("4 - Listagem de espécies.");
+            System.out.println("0 - Sair.");
 
 
                 opcao = scannerOpcao.nextInt();
                 scannerOpcao.nextLine();
+            System.out.println("Opção selecionada: " + opcao);
+
+            try {
                 switch (opcao){
                     case 1:
                         if (total <5){
@@ -39,16 +48,56 @@ public class Main {
 
                             System.out.println("Pet cadastrado. Agora são "+ (total+1) + " pets.");
 
-//                            System.out.println(petsCadastrados[total].nome);
-//                            System.out.println(petsCadastrados[total].especie);
-//                            System.out.println(petsCadastrados[total].peso);
-
                             total ++;
                         } else {
                             System.out.println("Limite de 5 pets atingido.");
                         }
                         break;
 
+                    case 2:
+                        if (total == 0){
+                            System.out.println("Ainda não temos nenhum pet cadastrado.");
+                        }else {
+                            System.out.println("--- PETS CADASTRADOS ---");
+
+                            for (int i = 0; i<total; i++){
+                                System.out.println(petsCadastrados[i].nome + "(" + petsCadastrados[i].especie + ")"
+                                        + " - " + petsCadastrados[i].peso + " kg.");
+
+                            }
+                        }
+                        break;
+
+                    case 3:
+                        System.out.println("Digite o nome que deseja buscar: ");
+                        String busca = scannerOpcao.nextLine();
+                        boolean achou = false;
+                        for (int i = 0; i<total; i++) {
+                            if (petsCadastrados[i].nome.equalsIgnoreCase(busca)){
+
+                                System.out.println(petsCadastrados[i].nome + "(" + petsCadastrados[i].especie + ")"
+                                        + " - " + petsCadastrados[i].peso + " kg.");
+                                achou = true;
+
+                            }
+
+                            if (!achou){
+                                System.out.println("Pet não encontrado nos registros.");
+                            }
+
+                        }
+                        break;
+
+                    case 4:
+                        HashSet<String> especies = new HashSet<>();
+                        for (int i = 0; i< total; i++){
+                            especies.add(petsCadastrados[i].especie);
+                        }
+                        for (String especie : especies){
+                            System.out.println(especie);
+                        }
+                        System.out.println(especies.size());
+                        break;
 
                     case 0:
                         System.out.println("Finalizando o sistema. Até a próxima.");
@@ -59,20 +108,14 @@ public class Main {
 
                 }
 
+            } catch (InputMismatchException e){
+                System.out.println("Digite apenas números!");
+                scannerOpcao.nextLine();
+            }
+
 
         }
         scannerOpcao.close();
-
-
-/*
-    System.out.println("========= FICHA DO PET =========");
-        System.out.println("Nome: " + pet1.nome);
-        System.out.println("Peso: " + pet1.peso + "kg.");
-        System.out.println("Espécie: " + pet1.especie);
-        System.out.println("Porte: " + pet1.portePet());
-
-        System.out.println("--- PETS CADASTRADOS ---");
-        System.out.print(petsCadastrados[0].nome + " - " + petsCadastrados[0].peso + " - " + petsCadastrados[0].portePet());*/
 
     }
 
