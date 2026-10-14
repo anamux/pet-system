@@ -17,4 +17,7 @@ public class Pet {
 
         }
     }
+
+    public void emitirSom(String nome) {
+    }
 }
