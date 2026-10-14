@@ -1,16 +1,13 @@
 package org.example;
 
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
+import java.util.*;
 
 
 public class Main {
     public static void main(String[] args) {
         Pet[] petsCadastrados = new Pet[5];
+        ArrayDeque<String> filaBanho = new ArrayDeque<>();
         int opcao = -1;
         int total = 0;
 
@@ -19,20 +16,23 @@ public class Main {
         while (opcao != 0 ){
             System.out.println("========= FICHA DO PET =========");
             System.out.println("1 - Cadastrar novo pet.");
-            System.out.println("2 - Listar pets");
+            System.out.println("2 - Listar pets.");
             System.out.println("3 - Buscar pelo nome.");
             System.out.println("4 - Listagem de espécies.");
+            System.out.println("5 - Entrar na Fila do Banho.");
+            System.out.println("6 - Atender o próximo.");
+            System.out.println("7 - Status de serviço:");
             System.out.println("0 - Sair.");
 
 
-                opcao = scannerOpcao.nextInt();
+            opcao = scannerOpcao.nextInt();
                 scannerOpcao.nextLine();
             System.out.println("Opção selecionada: " + opcao);
 
             try {
-                switch (opcao){
+                switch (opcao) {
                     case 1:
-                        if (total <5){
+                        if (total < 5) {
                             Pet pet1 = new Pet();
                             System.out.println("Qual é o nome do pet?");
                             pet1.nome = scannerOpcao.nextLine();
@@ -46,21 +46,21 @@ public class Main {
 
                             petsCadastrados[total] = pet1;
 
-                            System.out.println("Pet cadastrado. Agora são "+ (total+1) + " pets.");
+                            System.out.println("Pet cadastrado. Agora são " + (total + 1) + " pets.");
 
-                            total ++;
+                            total++;
                         } else {
                             System.out.println("Limite de 5 pets atingido.");
                         }
                         break;
 
                     case 2:
-                        if (total == 0){
+                        if (total == 0) {
                             System.out.println("Ainda não temos nenhum pet cadastrado.");
-                        }else {
+                        } else {
                             System.out.println("--- PETS CADASTRADOS ---");
 
-                            for (int i = 0; i<total; i++){
+                            for (int i = 0; i < total; i++) {
                                 System.out.println(petsCadastrados[i].nome + "(" + petsCadastrados[i].especie + ")"
                                         + " - " + petsCadastrados[i].peso + " kg.");
 
@@ -72,8 +72,8 @@ public class Main {
                         System.out.println("Digite o nome que deseja buscar: ");
                         String busca = scannerOpcao.nextLine();
                         boolean achou = false;
-                        for (int i = 0; i<total; i++) {
-                            if (petsCadastrados[i].nome.equalsIgnoreCase(busca)){
+                        for (int i = 0; i < total; i++) {
+                            if (petsCadastrados[i].nome.equalsIgnoreCase(busca)) {
 
                                 System.out.println(petsCadastrados[i].nome + "(" + petsCadastrados[i].especie + ")"
                                         + " - " + petsCadastrados[i].peso + " kg.");
@@ -81,7 +81,7 @@ public class Main {
 
                             }
 
-                            if (!achou){
+                            if (!achou) {
                                 System.out.println("Pet não encontrado nos registros.");
                             }
 
@@ -90,14 +90,58 @@ public class Main {
 
                     case 4:
                         HashSet<String> especies = new HashSet<>();
-                        for (int i = 0; i< total; i++){
+                        for (int i = 0; i < total; i++) {
                             especies.add(petsCadastrados[i].especie);
                         }
-                        for (String especie : especies){
+                        for (String especie : especies) {
                             System.out.println(especie);
                         }
                         System.out.println(especies.size());
                         break;
+
+                    case 5:
+                        System.out.println("Nome do pet para entrar na fila do banho:");
+                        String proximoDoBanho = scannerOpcao.nextLine();
+                      boolean cadastrado = false;
+
+                      for (int i = 0; i<total; i++){
+                          if (petsCadastrados[i].nome.equalsIgnoreCase(proximoDoBanho)){
+                              cadastrado = true;
+                              break;
+                          }
+                    }
+                      if (!cadastrado){
+                          System.out.println("Pet não encontrado!");
+                      }else {
+                          filaBanho.add(proximoDoBanho);
+
+                          System.out.println(proximoDoBanho + " entrou na fila do banho.");
+                          System.out.println("Fila agora: " + filaBanho);
+                      }
+                      break;
+
+
+                    case 6:
+                        if (filaBanho.isEmpty()){
+                            System.out.println("Não tem nenhum pet aguardando para tomar banho.");
+                        } else {
+                            System.out.println("Atendendo: " + filaBanho.poll()+ "...");
+                            System.out.println("Fila agora: " + filaBanho);
+                        }
+                        break;
+
+                    case 7:
+                        System.out.println("Qual nome do pet que deseja consultar o status?");
+                        String petStatus = scannerOpcao.nextLine();
+
+                        ArrayList<Servico> lista = new ArrayList<>();
+                        lista.add(new Banho());
+                        lista.add(new Tosa());
+                        lista.add(new Consulta());
+
+                        for (Servico item: lista){
+                            item.executar(petStatus);
+                        }
 
                     case 0:
                         System.out.println("Finalizando o sistema. Até a próxima.");
