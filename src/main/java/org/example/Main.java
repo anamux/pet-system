@@ -33,12 +33,21 @@ public class Main {
                 switch (opcao) {
                     case 1:
                         if (total < 5) {
-                            Pet pet1 = new Pet();
+                            Pet pet1;
                             System.out.println("Qual é o nome do pet?");
-                            pet1.nome = scannerOpcao.nextLine();
+                            String nome = scannerOpcao.nextLine();
 
                             System.out.println("Qual é a raça:");
-                            pet1.especie = scannerOpcao.nextLine();
+                            String especie = scannerOpcao.nextLine();
+
+                            if (especie.equalsIgnoreCase("cachorro")){
+                                pet1 = new Cachorro();
+                            } else if (especie.equalsIgnoreCase("gato")){
+                                pet1 = new Gato();
+                            } else {
+                                pet1 = new Pet();
+
+                            }
 
                             System.out.println("Qual é o peso?");
                             pet1.peso = scannerOpcao.nextDouble();
@@ -92,6 +101,9 @@ public class Main {
                         HashSet<String> especies = new HashSet<>();
                         for (int i = 0; i < total; i++) {
                             especies.add(petsCadastrados[i].especie);
+                            if (petsCadastrados[i].especie.equalsIgnoreCase("cachorro")){
+                                petsCadastrados[i].emitirSom(petsCadastrados[i].especie);
+                            }
                         }
                         for (String especie : especies) {
                             System.out.println(especie);
