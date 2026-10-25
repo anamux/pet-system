@@ -5,7 +5,7 @@ public class Pet {
     String especie;
     double peso;
 
-    String portePet() {
+    String portePet(Double peso) {
         if(peso < 10){
         return  "Pequeno";
 

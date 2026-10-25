@@ -12,8 +12,22 @@ public class Main {
         int total = 0;
 
         Scanner scannerOpcao = new Scanner(System.in);
+        Agendamento agendamento = Agendamento.builder()
+                .nomePet("Thor")
+                .servico("banho")
+                .horario("14h")
+                .perfume(true)
+                .laco(false)
+                .hidratacao(false)
+                .observacao("Alergico a shampoo")
+                .desconto("10% de desconto")
+                .build();
 
-        while (opcao != 0 ){
+        System.out.println(agendamento);
+
+
+        ///criar classe fila, classe listar, etc
+       /* while (opcao != 0 ){
             System.out.println("========= FICHA DO PET =========");
             System.out.println("1 - Cadastrar novo pet.");
             System.out.println("2 - Listar pets.");
@@ -23,7 +37,6 @@ public class Main {
             System.out.println("6 - Atender o próximo.");
             System.out.println("7 - Status de serviço:");
             System.out.println("0 - Sair.");
-
 
             opcao = scannerOpcao.nextInt();
                 scannerOpcao.nextLine();
@@ -171,7 +184,7 @@ public class Main {
 
 
         }
-        scannerOpcao.close();
+        scannerOpcao.close();*/
 
     }
 
